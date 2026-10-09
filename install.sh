@@ -5,7 +5,7 @@ set -euo pipefail
 
 REPO="${OPENROUTER_USAGE_REPO:-Qadees-ur-Rehman/openrouter-gnome-tray}"
 BRANCH="${OPENROUTER_USAGE_BRANCH:-main}"
-UUID="openrouter-usage@tray"
+UUID="openrouter-gnome-tray@qadees-ur-rehman.github.io"
 DEST="${XDG_DATA_HOME:-$HOME/.local/share}/gnome-shell/extensions/$UUID"
 
 bold=$'\e[1m'; green=$'\e[32m'; yellow=$'\e[33m'; red=$'\e[31m'; reset=$'\e[0m'
@@ -77,7 +77,29 @@ else
     [ -n "$src" ] || die "Download did not contain $UUID."
 fi
 
+# Removes a UUID from one of org.gnome.shell's string-list keys.
+remove_from_list() {
+    local list
+    list="$(gsettings get org.gnome.shell "$1" 2>/dev/null || echo '@as []')"
+    [[ "$list" == *"'$2'"* ]] || return 0
+    list="${list//\'$2\', /}"
+    list="${list//, \'$2\'/}"
+    list="${list//\'$2\'/}"
+    [[ "$list" == "[]" ]] && list="@as []"
+    gsettings set org.gnome.shell "$1" "$list"
+}
+
 # --- Install ------------------------------------------------------------------
+# Remove the pre-1.1 install, which used a different UUID.
+OLD_UUID="openrouter-usage@tray"
+OLD_DEST="$(dirname "$DEST")/$OLD_UUID"
+if [ -d "$OLD_DEST" ]; then
+    info "Removing old version ($OLD_UUID)"
+    gnome-extensions disable "$OLD_UUID" >/dev/null 2>&1 || true
+    rm -rf "$OLD_DEST"
+    remove_from_list enabled-extensions "$OLD_UUID"
+fi
+
 info "Installing to $DEST"
 rm -rf "$DEST"
 mkdir -p "$DEST"
@@ -110,14 +132,7 @@ if [[ "$enabled" != *"'$UUID'"* ]]; then
     gsettings set org.gnome.shell enabled-extensions "$enabled"
 fi
 
-disabled="$(gsettings get org.gnome.shell disabled-extensions 2>/dev/null || echo '@as []')"
-if [[ "$disabled" == *"'$UUID'"* ]]; then
-    disabled="${disabled//\'$UUID\', /}"
-    disabled="${disabled//, \'$UUID\'/}"
-    disabled="${disabled//\'$UUID\'/}"
-    [[ "$disabled" == "[]" ]] && disabled="@as []"
-    gsettings set org.gnome.shell disabled-extensions "$disabled"
-fi
+remove_from_list disabled-extensions "$UUID"
 
 gnome-extensions enable "$UUID" >/dev/null 2>&1 || true
 

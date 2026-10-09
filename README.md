@@ -45,7 +45,7 @@ unset K
 
 ## Settings
 
-Click **Settings** in the popup, or run `gnome-extensions prefs openrouter-usage@tray`. You can change:
+Click **Settings** in the popup, or run `gnome-extensions prefs openrouter-gnome-tray@qadees-ur-rehman.github.io`. You can change:
 
 - **Label shows**: Smart / Remaining budget / Total usage / Today / Percent / Icon only
 - **Position**: right, center (next to the clock) or left
@@ -64,7 +64,7 @@ This also deletes the key from your keyring. To keep the key, add `-s -- --keep-
 
 | Problem | Fix |
 | --- | --- |
-| Nothing shows in the top bar | Log out and back in. Then run `gnome-extensions info openrouter-usage@tray`; it should say `ENABLED`. |
+| Nothing shows in the top bar | Log out and back in. Then run `gnome-extensions info openrouter-gnome-tray@qadees-ur-rehman.github.io`; it should say `ENABLED`. |
 | "Keyring unavailable" | Make sure GNOME Keyring is running and unlocked. With auto-login, the keyring may ask for your password once. |
 | "OpenRouter rejected this key" | The key was revoked or mistyped. Create a new one at openrouter.ai/settings/keys. |
 | See the logs | `journalctl -f -o cat /usr/bin/gnome-shell \| grep -i openrouter` |
@@ -83,12 +83,14 @@ dbus-run-session gnome-shell --devkit --wayland   # GNOME 49+
 dbus-run-session -- gnome-shell --nested --wayland # GNOME 45-48
 ```
 
+To build the zip for extensions.gnome.org: `./pack.sh`
+
 Files:
 
-- `openrouter-usage@tray/extension.js`: the top-bar indicator and popup
-- `openrouter-usage@tray/prefs.js`: the settings window
-- `openrouter-usage@tray/keyring.js`: libsecret store, lookup and clear
-- `openrouter-usage@tray/api.js`: calls `GET /api/v1/key`
+- `openrouter-gnome-tray@qadees-ur-rehman.github.io/extension.js`: the top-bar indicator and popup
+- `openrouter-gnome-tray@qadees-ur-rehman.github.io/prefs.js`: the settings window
+- `openrouter-gnome-tray@qadees-ur-rehman.github.io/keyring.js`: libsecret store, lookup and clear
+- `openrouter-gnome-tray@qadees-ur-rehman.github.io/api.js`: calls `GET /api/v1/key`
 
 ## License
 

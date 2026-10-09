@@ -4,23 +4,24 @@
 #   ... | bash -s -- --keep-key     # keep the API key in the keyring
 set -euo pipefail
 
-UUID="openrouter-usage@tray"
-DEST="${XDG_DATA_HOME:-$HOME/.local/share}/gnome-shell/extensions/$UUID"
+EXT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/gnome-shell/extensions"
 keep_key=0
 [ "${1:-}" = "--keep-key" ] && keep_key=1
 
-gnome-extensions disable "$UUID" >/dev/null 2>&1 || true
+# Current UUID plus the one used before version 1.1.
+for uuid in "openrouter-gnome-tray@qadees-ur-rehman.github.io" "openrouter-usage@tray"; do
+    gnome-extensions disable "$uuid" >/dev/null 2>&1 || true
+    enabled="$(gsettings get org.gnome.shell enabled-extensions 2>/dev/null || echo '@as []')"
+    if [[ "$enabled" == *"'$uuid'"* ]]; then
+        enabled="${enabled//\'$uuid\', /}"
+        enabled="${enabled//, \'$uuid\'/}"
+        enabled="${enabled//\'$uuid\'/}"
+        [[ "$enabled" == "[]" ]] && enabled="@as []"
+        gsettings set org.gnome.shell enabled-extensions "$enabled"
+    fi
+    rm -rf "${EXT_DIR:?}/$uuid"
+done
 
-enabled="$(gsettings get org.gnome.shell enabled-extensions 2>/dev/null || echo '@as []')"
-if [[ "$enabled" == *"'$UUID'"* ]]; then
-    enabled="${enabled//\'$UUID\', /}"
-    enabled="${enabled//, \'$UUID\'/}"
-    enabled="${enabled//\'$UUID\'/}"
-    [[ "$enabled" == "[]" ]] && enabled="@as []"
-    gsettings set org.gnome.shell enabled-extensions "$enabled"
-fi
-
-rm -rf "$DEST"
 dconf reset -f /org/gnome/shell/extensions/openrouter-usage/ 2>/dev/null || true
 
 if [ "$keep_key" -eq 0 ]; then
