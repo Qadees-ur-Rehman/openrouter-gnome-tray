@@ -1,0 +1,71 @@
+/* Top-bar label */
+.openrouter-panel-label {
+  padding-left: 4px;
+  font-feature-settings: "tnum";
+}
+.openrouter-panel-label.warning { color: #f8e45c; }
+.openrouter-panel-label.critical { color: #ff7b63; }
+.openrouter-panel-label.stale { color: #9a9996; }
+
+/* Popup */
+.openrouter-menu { min-width: 360px; }
+
+.openrouter-header { spacing: 12px; padding: 4px 0; }
+.openrouter-title { font-weight: bold; font-size: 1.15em; }
+.openrouter-status-box { spacing: 6px; }
+.openrouter-status-text { font-size: 0.9em; }
+
+.openrouter-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #9a9996;
+}
+.openrouter-status-dot.ok { background-color: #33d17a; }
+.openrouter-status-dot.loading { background-color: #f6d32d; }
+.openrouter-status-dot.error { background-color: #e01b24; }
+
+.openrouter-card {
+  background-color: rgba(127, 127, 127, 0.12);
+  border-radius: 12px;
+  padding: 12px 14px;
+  spacing: 8px;
+}
+.openrouter-usage-title { font-weight: bold; font-size: 1.1em; }
+.openrouter-usage-amount { font-weight: bold; font-size: 1.2em; }
+.openrouter-usage-limit { color: #9a9996; font-size: 1.05em; }
+
+.openrouter-progress-track {
+  height: 8px;
+  border-radius: 4px;
+  background-color: rgba(127, 127, 127, 0.3);
+}
+.openrouter-progress-fill {
+  height: 8px;
+  border-radius: 4px;
+  background-color: #33d17a;
+}
+.openrouter-progress-fill.warning { background-color: #f6d32d; }
+.openrouter-progress-fill.critical { background-color: #e01b24; }
+
+.openrouter-dim { color: #9a9996; font-size: 0.9em; }
+.openrouter-good { color: #2ec27e; font-size: 0.9em; }
+.openrouter-good.warning, .openrouter-dim.warning { color: #e5a50a; }
+.openrouter-good.critical, .openrouter-dim.critical { color: #ff7b63; }
+
+.openrouter-row-value { font-weight: bold; font-feature-settings: "tnum"; }
+
+/* Key setup */
+.openrouter-setup { spacing: 8px; min-width: 320px; }
+.openrouter-setup-title { font-weight: bold; }
+.openrouter-entry { min-width: 300px; }
+.openrouter-error { color: #ff7b63; font-size: 0.9em; }
+
+/* Buttons */
+.openrouter-actions { spacing: 8px; }
+.openrouter-button { padding: 6px 10px; border-radius: 8px; }
+.openrouter-button-box { spacing: 6px; }
+.openrouter-primary { background-color: #3584e4; color: #ffffff; }
+.openrouter-primary:hover { background-color: #4a90e8; }
+.openrouter-primary:active { background-color: #2a6fc0; }
+.openrouter-primary:insensitive { background-color: rgba(53, 132, 228, 0.5); }

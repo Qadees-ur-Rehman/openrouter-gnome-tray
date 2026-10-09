@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.openrouter-usage"
+          path="/org/gnome/shell/extensions/openrouter-usage/">
+    <key name="refresh-interval" type="i">
+      <range min="30" max="3600"/>
+      <default>60</default>
+      <summary>Seconds between automatic refreshes</summary>
+    </key>
+    <key name="panel-display" type="s">
+      <choices>
+        <choice value="smart"/>
+        <choice value="remaining"/>
+        <choice value="usage"/>
+        <choice value="today"/>
+        <choice value="percent"/>
+        <choice value="icon"/>
+      </choices>
+      <default>'smart'</default>
+      <summary>What the top-bar label shows</summary>
+    </key>
+    <key name="panel-position" type="s">
+      <choices>
+        <choice value="right"/>
+        <choice value="center"/>
+        <choice value="left"/>
+      </choices>
+      <default>'right'</default>
+      <summary>Where the indicator sits in the top bar</summary>
+    </key>
+    <key name="show-icon" type="b">
+      <default>true</default>
+      <summary>Show the icon next to the label</summary>
+    </key>
+    <key name="key-revision" type="i">
+      <default>0</default>
+      <summary>Bumped by the preferences window when the stored key changes (never holds the key itself)</summary>
+    </key>
+  </schema>
+</schemalist>

@@ -1,0 +1,9 @@
+{
+  "uuid": "openrouter-usage@tray",
+  "name": "OpenRouter Usage",
+  "description": "Shows your OpenRouter API key usage, spending limit and free-model requests in the top bar. Your API key is stored encrypted in the GNOME Keyring.",
+  "shell-version": ["45", "46", "47", "48", "49"],
+  "settings-schema": "org.gnome.shell.extensions.openrouter-usage",
+  "url": "https://github.com/Qadees-ur-Rehman/openrouter-gnome-tray",
+  "version": 1
+}
