@@ -4,7 +4,7 @@
           path="/org/gnome/shell/extensions/openrouter-usage/">
     <key name="refresh-interval" type="i">
       <range min="30" max="3600"/>
-      <default>60</default>
+      <default>300</default>
       <summary>Seconds between automatic refreshes</summary>
     </key>
     <key name="panel-display" type="s">

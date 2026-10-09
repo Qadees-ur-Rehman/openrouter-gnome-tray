@@ -9,7 +9,7 @@ See your [OpenRouter](https://openrouter.ai) API key usage in the Linux top bar.
   - free-model requests used today
   - limit reset period and key expiry
   - refresh, change key, and settings buttons
-- It refreshes on its own every 60 seconds, and again when you open it.
+- It refreshes on its own every 5 minutes, and again when you open it.
 - The label turns yellow at 75% of your limit and red at 90%.
 
 ## Install (one command)
