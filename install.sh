@@ -83,6 +83,14 @@ rm -rf "$DEST"
 mkdir -p "$DEST"
 cp -r "$src"/. "$DEST"/
 
+# GNOME refuses to load an extension that doesn't list the running major
+# version ("OUT OF DATE"). Add it so newer GNOME releases work out of the box.
+if [ -n "$shell_major" ] && ! grep -q "\"$shell_major\"" "$DEST/metadata.json"; then
+    warn "GNOME $shell_major is newer than this release was tested on; enabling it anyway."
+    sed -i "s/\"shell-version\": \[/\"shell-version\": [\"$shell_major\", /" "$DEST/metadata.json"
+fi
+info "Supported GNOME versions: $(grep -o '"shell-version": \[[^]]*\]' "$DEST/metadata.json" | cut -d'[' -f2 | tr -d ']\"')"
+
 if command -v glib-compile-schemas >/dev/null 2>&1; then
     glib-compile-schemas "$DEST/schemas"
 elif [ ! -f "$DEST/schemas/gschemas.compiled" ]; then
