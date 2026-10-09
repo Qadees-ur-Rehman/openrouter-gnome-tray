@@ -102,7 +102,10 @@ class OpenRouterIndicator extends PanelMenu.Button {
         this.menu.connect('open-state-changed', (_menu, open) => this._onMenuToggled(open));
 
         this._settingsIds = [
-            this._settings.connect('changed::refresh-interval', () => this._restartTimer()),
+            this._settings.connect('changed::refresh-interval', () => {
+                this._restartTimer();
+                this._updateUI();
+            }),
             this._settings.connect('changed::panel-display', () => this._updateUI()),
             this._settings.connect('changed::show-icon', () => this._updateUI()),
             this._settings.connect('changed::key-revision', () => this._loadKeyAndRefresh()),
@@ -574,8 +577,9 @@ class OpenRouterIndicator extends PanelMenu.Button {
         }
 
         const interval = this._settings.get_int('refresh-interval');
+        const every = interval % 60 === 0 ? `${interval / 60} min` : `${interval}s`;
         this._updatedRow.value.text = this._lastUpdated
-            ? `${this._lastUpdated.format('%H:%M:%S')} · every ${interval}s`
+            ? `${this._lastUpdated.format('%H:%M:%S')} · every ${every}`
             : '—';
     }
 
