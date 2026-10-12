@@ -2,6 +2,9 @@
 
 See your [OpenRouter](https://openrouter.ai) API key usage in the Linux top bar.
 
+<img width="555" height="410" alt="Screenshot from 2026-10-12 17-30-43" src="https://github.com/user-attachments/assets/80e86923-c2c5-4d90-af76-e72b91804be0" />
+
+
 - The **top bar** shows the most useful number: how much budget is left (if your key has a limit), free requests left (free tier), or today's spend.
 - **Click it** to see:
   - total usage against your limit, with a progress bar
@@ -51,6 +54,9 @@ Click **Settings** in the popup, or run `gnome-extensions prefs openrouter-gnome
 - **Position**: right, center (next to the clock) or left
 - **Show icon** and **refresh interval**
 - Your saved key: replace it or remove it
+
+  <img width="457" height="622" alt="Screenshot from 2026-10-12 17-33-16" src="https://github.com/user-attachments/assets/df2ea0e7-7e9b-44a9-8955-8108b7de599e" />
+
 
 ## Uninstall
 
